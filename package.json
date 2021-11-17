@@ -1,0 +1,38 @@
+{
+  "name": "koa2-weibo-learn",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node bin/www",
+    "dev": "cross-env NODE_ENV=dev nodemon --inspect=9229 bin/www",
+    "prd": "cross-env NODE_ENV=dev nodemon bin/www",
+    "test": "cross-env NODE_ENV=test jest --runInBand --forceExit --color"
+  },
+  "dependencies": {
+    "ajv": "^8.8.0",
+    "cross-env": "^7.0.3",
+    "debug": "^4.1.1",
+    "ejs": "~2.3.3",
+    "jest": "^27.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-convert": "^1.2.0",
+    "koa-generic-session": "^2.2.0",
+    "koa-json": "^2.0.2",
+    "koa-jwt": "^4.0.3",
+    "koa-logger": "^3.2.0",
+    "koa-onerror": "^4.1.0",
+    "koa-redis": "^4.0.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.0",
+    "mysql2": "^2.3.2",
+    "redis": "^3.1.2",
+    "sequelize": "^6.8.0",
+    "supertest": "^6.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
