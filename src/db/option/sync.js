@@ -1,4 +1,4 @@
-const seq = require('./seq')
+const seq = require('../seq')
 require('./model/index')
 
 // seq.authenticate().then(() => {

@@ -14,11 +14,9 @@ const { REDIS_CONF } = require('./conf/db')
 const { SESSION_SECRET_KEY } = require('./conf/constants')
 
 const index = require('./routes/index')
-const users = require('./routes/users')
 const userViewRouter = require('./routes/view/user')
-const userApiRouter=require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
-
+const userApiRouter = require('./routes/api/user')
 // error handler
 const onerrorConf = {}
 if (isProd) {
@@ -71,9 +69,9 @@ app.use(session({
 
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
+//error最后注册
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
 
 // error-handling

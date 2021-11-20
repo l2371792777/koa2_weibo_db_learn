@@ -27,12 +27,12 @@ async function loginRedirect(ctx, next) {
     if (ctx.session.userInfo) {
         //已登录
         await next()
+        return 
     }
     //未登录
     //页面跳转
     const url=ctx.url
     ctx.redirect('/login?url='+encodeURIComponent(url))
-
 }
 
 module.exports = {

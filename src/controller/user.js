@@ -51,7 +51,6 @@ async function register({ userName, password, gender }) {
  */
 async function login(ctx, userName, password) {
     const userInfo = await getUserInfo(userName, doCrypto(password))
-    console.log(userName+" "+password+" "+JSON.stringify(userInfo))
     if (!userInfo) {
         return new ErrorModel(userLoginFailInfo)
     }

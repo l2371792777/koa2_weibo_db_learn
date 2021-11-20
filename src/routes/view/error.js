@@ -10,7 +10,7 @@ router.get('/error', async (ctx, next) => {
 
 router.get('*', async (ctx, next) => {
     // await ctx.render("404")
-    ctx.render("404")
+    await ctx.render("404")
 })
 
 module.exports = router

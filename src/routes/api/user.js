@@ -2,11 +2,11 @@
  * @description user API 路由
  */
 const router = require('koa-router')()
-const { isExist, register, login,deleteCurUser } = require('../../controller/user')
+const { isExist, register, login, deleteCurUser } = require('../../controller/user')
 const userValidator = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validator')
 const { isTest } = require('../../utils/env')
-const {loginCheck}=require('../../middlewares/loginCheck')
+const { loginCheck } = require('../../middlewares/loginCheck')
 
 
 router.prefix('/api/user')
@@ -32,11 +32,11 @@ router.post('/isExist', async (ctx, next) => {
 })
 
 //删除
-router.post('/delete',loginCheck, async (ctx, next) => {
+router.post('/delete', loginCheck, async (ctx, next) => {
     if (isTest) {
         //测试环境下，删除当前账号
         const { userName } = ctx.session.userInfo
-        ctx.body=await deleteCurUser(userName)
+        ctx.body = await deleteCurUser(userName)
     }
 })
 

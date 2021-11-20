@@ -32,8 +32,7 @@ function formatUser(list) {
     }
 
     //单个用户
-    result = _formatUserPicture(list)
-    return result
+    return _formatUserPicture(list)
 }
 
 module.exports = {

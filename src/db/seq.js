@@ -17,13 +17,6 @@ const seq = new Sequelize(
     database, user, password, conf
 )
 
-// 测试连接
-// seq.authenticate().then(() => {
-//     console.log('ok')
-// }).catch(() => {
-//     console.log('error')
-// })
-
 if (isProd) {
     conf.pool = {
         max: 5,
@@ -31,12 +24,6 @@ if (isProd) {
         idle: 10000
     }
 }
-//连接池
-// conf.pool={
-//     max:5,
-//     min:0,
-//     idle:10000
-// }
 
 module.exports = seq
 

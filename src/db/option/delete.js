@@ -1,4 +1,4 @@
-const { User } = require('./model/index')
+const { User } = require('../model/index')
 const { Sequelize } = require('sequelize')
 
 !(async function () {
