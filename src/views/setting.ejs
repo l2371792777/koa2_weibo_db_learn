@@ -132,23 +132,24 @@
                     return
                 }
                 alert('修改成功')
-                $inputCurPassword.val('')
-                $inputNewPassword.val('')
-                $inputNewPasswordRepeat.val('')
+                //退出登录
+                $('#btn-logout').click()
+                // $inputCurPassword.val('')
+                // $inputNewPassword.val('')
+                // $inputNewPasswordRepeat.val('')
             })
         })
 
         // 退出登录
         $('#btn-logout').click(function () {
-            if (confirm('是否确定退出登录？') === false) {
-                return
-            }
+            // if (confirm('是否确定退出登录？') === false) {
+            //     return
+            // }
             ajax.post('/api/user/logout', function (err, data) {
                 if (err) {
                     console.error(err)
                     return
                 }
-                alert('已成功退出')
                 location.href = '/login'
             })
         })

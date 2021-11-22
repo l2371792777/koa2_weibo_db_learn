@@ -4,7 +4,9 @@
 
 const { updateUser, getUserInfo, createUser, deleteUser } = require('../servers/user')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
-const { updateUserFailInfo, registerUserNameNotExistInfo, registerUserNameExistInfo, registerFailInfo, userLoginFailInfo, deleteUserFailInfo } = require('../model/ErrorInfo')
+const {
+    UserPasswordErrorInfo, updateUserPasswordFailInfo, updateUserFailInfo, registerUserNameNotExistInfo, registerUserNameExistInfo, registerFailInfo, userLoginFailInfo, deleteUserFailInfo
+} = require('../model/ErrorInfo')
 const { doCrypto } = require('../utils/cryp')
 const { userRelation } = require('../db/model')
 
@@ -103,10 +105,49 @@ async function changeInfo(ctx, { nickName, city, picture }) {
     return new ErrorModel(updateUserFailInfo)
 }
 
+/**
+ * 修改密码
+ * @param {Object} ctx koa ctx
+ * @param {Object} param1 用户密码
+ * @returns 
+ */
+async function changePassword(ctx, { password, newPassword }) {
+    const userName = ctx.session.userInfo.userName
+    const curPassword = ctx.session.userInfo.password
+    if (curPassword != doCrypto(password)) {
+        return new ErrorModel(UserPasswordErrorInfo)
+    }
+
+    const result = await updateUser(
+        {
+            newPassword: doCrypto(newPassword)
+        },
+        {
+            userName,
+            password: doCrypto(password)
+        })
+    if (result) {
+        return new SuccessModel()
+    }
+    return new ErrorModel(updateUserPasswordFailInfo)
+}
+
+/**
+ * 退出登录
+ * @param {Object} ctx 
+ * @returns 
+ */
+async function loginOut(ctx){
+    delete ctx.session.userInfo
+    return new SuccessModel()
+}
+
 module.exports = {
     isExist,
     register,
     login,
     deleteCurUser,
-    changeInfo
+    changeInfo,
+    changePassword,
+    loginOut
 }

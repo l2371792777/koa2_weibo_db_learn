@@ -87,12 +87,10 @@ async function updateUser({ newNickName, newCity, newPassword, newPicture }, { u
         whereOpt.password = password
     }
 
-    console.log("userInfo... "+JSON.stringify(data))
     const result = await User.update(data,
         {
             where: whereOpt
         })
-    console.log("result... "+JSON.stringify(result))
     return result[0] > 0
 }
 

@@ -45,5 +45,13 @@ module.exports={
     updateUserFailInfo:{
         errno:10010,
         message:'更新信息失败'
+    },
+    updateUserPasswordFailInfo:{
+        errno:10011,
+        message:'修改密码失败'
+    },
+    UserPasswordErrorInfo:{
+        errno:10012,
+        message:'密码输入错误'
     }
 }
