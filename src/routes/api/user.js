@@ -2,11 +2,12 @@
  * @description user API 路由
  */
 const router = require('koa-router')()
-const { isExist, register, login, deleteCurUser } = require('../../controller/user')
+const { isExist, register, login, deleteCurUser, changeInfo } = require('../../controller/user')
 const userValidator = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validator')
 const { isTest } = require('../../utils/env')
 const { loginCheck } = require('../../middlewares/loginCheck')
+const { ErrorModel } = require('../../model/ResModel')
 
 
 router.prefix('/api/user')
@@ -28,7 +29,7 @@ router.post('/login', async (ctx, next) => {
 //用户是否存在
 router.post('/isExist', async (ctx, next) => {
     const { userName } = ctx.request.body
-    
+
     ctx.body = await isExist(userName)
 })
 
@@ -39,6 +40,13 @@ router.post('/delete', loginCheck, async (ctx, next) => {
         const { userName } = ctx.session.userInfo
         ctx.body = await deleteCurUser(userName)
     }
+})
+
+//修改个人信息
+router.patch('/changeInfo', loginCheck, genValidator(userValidator), async (ctx, next) => {
+    const { nickName, city, picture } = ctx.request.body
+    ctx.body = await changeInfo(ctx, { nickName, city, picture })
+    
 })
 
 module.exports = router

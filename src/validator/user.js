@@ -35,8 +35,7 @@ const SCHEMA = {
         },
         city: {
             type: 'string',
-            maxLength: 255,
-            minLength: 2
+            maxLength: 255
         },
         gender: {
             type: 'number',

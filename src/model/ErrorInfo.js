@@ -41,5 +41,9 @@ module.exports={
     fileOverMaxSizeInfo:{
         errno:10009,
         message:'图片大于2M'
+    },
+    updateUserFailInfo:{
+        errno:10010,
+        message:'更新信息失败'
     }
 }

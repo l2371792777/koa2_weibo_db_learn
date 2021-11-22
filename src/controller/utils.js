@@ -14,9 +14,9 @@ const FOLDER_PATH = fpath.join(__dirname, '..', '..', 'uploadFiles')
 
 
 // 是否需要创建目录
-fse.pathExists(DIST_FOLDER_PATH).then(exist => {
+fse.pathExists(FOLDER_PATH).then(exist => {
     if (!exist) {
-        fse.ensureDir(DIST_FOLDER_PATH)
+        fse.ensureDir(FOLDER_PATH)
     }
 })
 
@@ -32,9 +32,7 @@ async function saveFile({ name, path, type, size }) {
 
     //移动文件
     const fileName = Date.now() + '.' + name
-    console.log('fileName... ' + fileName)
     const filePath = fpath.join(FOLDER_PATH, fileName)
-    console.log('filePath... ' + filePath)
     await fse.move(path, filePath)
 
     return new SuccessModel({ url: '/' + fileName })

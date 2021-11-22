@@ -50,16 +50,55 @@ async function createUser({ userName, password, gender = 3, nickName }) {
  * return 删除行数是否大于0
  */
 async function deleteUser(userName) {
-    const result=await User.destroy({
-        where:{
+    const result = await User.destroy({
+        where: {
             userName
         }
     })
-    return result>0
+    return result > 0
+}
+
+/**
+ * 修改用户信息
+ * @param {Object} param0 待修改数据
+ * @param {Object} param1 where 筛选字段
+ */
+async function updateUser({ newNickName, newCity, newPassword, newPicture }, { userName, password }) {
+    //修改数据
+    const data = {}
+    if (newNickName) {
+        data.nickName = newNickName
+    }
+    if (newCity) {
+        data.city = newCity
+    }
+    if (newPassword) {
+        data.password = newPassword
+    }
+    if (newPicture) {
+        data.picture = newPicture
+    }
+
+    //查询条件
+    const whereOpt = {
+        userName
+    }
+    if (password) {
+        whereOpt.password = password
+    }
+
+    console.log("userInfo... "+JSON.stringify(data))
+    const result = await User.update(data,
+        {
+            where: whereOpt
+        })
+    console.log("result... "+JSON.stringify(result))
+    return result[0] > 0
 }
 
 module.exports = {
     getUserInfo,
     createUser,
-    deleteUser
+    deleteUser,
+    updateUser
 }
