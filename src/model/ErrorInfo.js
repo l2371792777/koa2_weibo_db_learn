@@ -37,5 +37,9 @@ module.exports={
     deleteUserFailInfo:{
         errno:10008,
         message:'删除用户失败'
+    },
+    fileOverMaxSizeInfo:{
+        errno:10009,
+        message:'图片大于2M'
     }
 }

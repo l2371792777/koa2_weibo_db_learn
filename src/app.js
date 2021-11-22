@@ -7,6 +7,8 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const redisStore = require('koa-redis')
 const session = require('koa-generic-session')
+const path=require('path')
+const koaStatic=require('koa-static')
 const jwtKoa = require('koa-jwt')
 
 const { isProd } = require('./utils/env')
@@ -17,6 +19,9 @@ const index = require('./routes/index')
 const userViewRouter = require('./routes/view/user')
 const errorViewRouter = require('./routes/view/error')
 const userApiRouter = require('./routes/api/user')
+const utilsApiRouter = require('./routes/api/utils')
+
+
 // error handler
 const onerrorConf = {}
 if (isProd) {
@@ -38,7 +43,8 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(koaStatic(path.join(__dirname+'/public')))
+app.use(koaStatic(path.join(__dirname,'..','uploadFiles')))
 
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
@@ -71,6 +77,7 @@ app.use(session({
 app.use(index.routes(), index.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
+app.use(utilsApiRouter.routes(), utilsApiRouter.allowedMethods())
 //error最后注册
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
 

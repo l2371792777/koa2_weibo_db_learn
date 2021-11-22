@@ -28,6 +28,7 @@ router.post('/login', async (ctx, next) => {
 //用户是否存在
 router.post('/isExist', async (ctx, next) => {
     const { userName } = ctx.request.body
+    
     ctx.body = await isExist(userName)
 })
 
