@@ -85,7 +85,7 @@ test('删除用户，应该成功', async () => {
     const res = await server
         .post('/api/user/delete')
         .set('cookie', COOKIE)
-    console.log("del..res.." + JSON.stringify(res.body))
+    
     expect(res.body.errno).toBe(0)
 })
 

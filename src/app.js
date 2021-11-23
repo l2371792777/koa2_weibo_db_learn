@@ -15,8 +15,8 @@ const { isProd } = require('./utils/env')
 const { REDIS_CONF } = require('./conf/db')
 const { SESSION_SECRET_KEY } = require('./conf/constants')
 
-const index = require('./routes/index')
 const userViewRouter = require('./routes/view/user')
+const blogViewRouter = require('./routes/view/blog')
 const errorViewRouter = require('./routes/view/error')
 const userApiRouter = require('./routes/api/user')
 const utilsApiRouter = require('./routes/api/utils')
@@ -50,13 +50,6 @@ app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
 
-// logger
-// app.use(async (ctx, next) => {
-//   const start = new Date()
-//   await next()
-//   const ms = new Date() - start
-//   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-// })
 
 //session
 app.keys = [SESSION_SECRET_KEY]
@@ -74,8 +67,8 @@ app.use(session({
 }))
 
 // routes
-app.use(index.routes(), index.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
+app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 app.use(utilsApiRouter.routes(), utilsApiRouter.allowedMethods())
 //error最后注册
