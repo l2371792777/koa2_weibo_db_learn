@@ -28,7 +28,7 @@ test('重复注册用户,注册应该失败', async () => {
 })
 
 test('查询用户名是否存在，用户应存在', async () => {
-    const res = await server.post('/api/user/isExist').send({userName})
+    const res = await server.post('/api/user/isExist').send({ userName })
     expect(res.body.errno).toBe(0)
 })
 
@@ -52,19 +52,53 @@ test('登录，应该成功', async () => {
 
     // 获取 cookie
     COOKIE = res.headers['set-cookie'].join(';')
-    console.log("cookie:.."+COOKIE)
+    console.log("cookie:.." + COOKIE)
+})
+
+
+test('修改基本信息，应该成功', async () => {
+    const res = await server
+        .patch('/api/user/changeInfo')
+        .send({
+            nickName: "admin",
+            city: "admin",
+            picture: '/test'
+        })
+        .set('cookie', COOKIE)
+    expect(res.body.errno).toBe(0)
+
+})
+
+test('修改密码，应该成功', async () => {
+    const res = await server
+        .patch('/api/user/changePassword')
+        .send({
+            password: password,
+            newPassword: 'adminer'
+        })
+        .set('cookie', COOKIE)
+    expect(res.body.errno).toBe(0)
+
 })
 
 test('删除用户，应该成功', async () => {
     const res = await server
         .post('/api/user/delete')
         .set('cookie', COOKIE)
-    console.log("del..res.."+JSON.stringify(res.body))
+    console.log("del..res.." + JSON.stringify(res.body))
     expect(res.body.errno).toBe(0)
 })
 
+test('退出登录,应该成功', async () => {
+    const res = await server
+        .post('/api/user/logout')
+        .set('cookie', COOKIE)
+    expect(res.body.errno).toBe(0)
+
+})
+
 test('再次查询用户名是否存在，用户应不存在', async () => {
-    const res = await server.post('/api/user/isExist').send({userName})
+    const res = await server.post('/api/user/isExist').send({ userName })
     expect(res.body.errno).not.toBe(0)
 })
 
