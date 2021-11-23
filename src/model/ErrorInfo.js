@@ -50,8 +50,12 @@ module.exports={
         errno:10011,
         message:'修改密码失败'
     },
-    UserPasswordErrorInfo:{
+    userPasswordErrorInfo:{
         errno:10012,
         message:'密码输入错误'
+    },
+    createBlogFailInfo:{
+        errno:10013,
+        message:'创建博客失败'
     }
 }

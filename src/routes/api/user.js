@@ -7,8 +7,6 @@ const userValidator = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validator')
 const { isTest } = require('../../utils/env')
 const { loginCheck } = require('../../middlewares/loginCheck')
-const { ErrorModel } = require('../../model/ResModel')
-
 
 router.prefix('/api/user')
 

@@ -5,10 +5,10 @@
 const { updateUser, getUserInfo, createUser, deleteUser } = require('../servers/user')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const {
-    UserPasswordErrorInfo, updateUserPasswordFailInfo, updateUserFailInfo, registerUserNameNotExistInfo, registerUserNameExistInfo, registerFailInfo, userLoginFailInfo, deleteUserFailInfo
+    userPasswordErrorInfo, updateUserPasswordFailInfo, updateUserFailInfo, registerUserNameNotExistInfo, registerUserNameExistInfo, registerFailInfo, userLoginFailInfo, deleteUserFailInfo
 } = require('../model/ErrorInfo')
 const { doCrypto } = require('../utils/cryp')
-const { userRelation } = require('../db/model')
+
 
 /**
  * 用户是否存在
@@ -47,7 +47,7 @@ async function register({ userName, password, gender }) {
 }
 
 /**
- * 登录
+ * 登录userPasswordErrorInfo
  * @param {Object} ctx koa2 ctx 存储session 
  * @param {string} userName 用户名
  * @param {string} passowrd 密码
@@ -115,7 +115,7 @@ async function changePassword(ctx, { password, newPassword }) {
     const userName = ctx.session.userInfo.userName
     const curPassword = ctx.session.userInfo.password
     if (curPassword != doCrypto(password)) {
-        return new ErrorModel(UserPasswordErrorInfo)
+        return new ErrorModel(userPasswordErrorInfo)
     }
 
     const result = await updateUser(
