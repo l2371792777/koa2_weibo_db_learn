@@ -1,33 +1,39 @@
-const Sequelize=require('sequelize')
-const seq=require('../seq')
+
 const User=require('./user')
 const Blog=require('./blog')
 const AtRelation=require('./atRelation')
-const userRelation=require('./userRelation')
+const UserRelation=require('./userRelation')
 
-User.hasMany(Blog,{
+
+Blog.belongsTo(User,{
     foreignKey:'userId'
 })
 
-userRelation.belongsTo(User,{
+UserRelation.belongsTo(User,{
     foreignKey:'userId'
 })
 
-userRelation.belongsTo(User,{
+UserRelation.belongsTo(User,{
     foreignKey:'followerId'
 })
 
-AtRelation.belongsTo(User,{
-    foreignKey:'userId'
+User.hasMany(UserRelation, {
+    foreignKey: 'userId'
 })
 
-AtRelation.belongsTo(Blog,{
-    foreignKey:'blogId'
+
+Blog.belongsTo(UserRelation, {
+    foreignKey: 'userId',
+    targetKey: 'followerId'
+})
+
+Blog.hasMany(AtRelation, {
+    foreignKey: 'blogId'
 })
 
 module.exports={
     User,
-    userRelation,
+    UserRelation,
     Blog,
     AtRelation
 }
