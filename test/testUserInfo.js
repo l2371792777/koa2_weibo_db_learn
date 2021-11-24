@@ -3,5 +3,6 @@
  */
 
 module.exports={
-    COOKIE:'cookie.sid=Dinlcdcg2buOrX1h7KASpOWeIXhSQX4J; cookie.sid.sig=76RBE2shpFTD3kZ3I7p5ON7t6jE'
+    USER_NAME:'ayanami',
+    COOKIE:'cookie.sid=QlXw4BIziAaybadvC9Cq1oXSAETqhjmN; cookie.sid.sig=h7AJJ1-QoAa7K18rlb3s_n4xg34'
 }
