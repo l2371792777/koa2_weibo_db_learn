@@ -4,12 +4,19 @@
 
 const router = require('koa-router')()
 const { loginRedirect } = require('../../middlewares/loginCheck')
-const { getProfileBlogList } = require('../../controller/blog-profile')
-const {getSquareBlogList}=require('../../controller/blog.square')
+const { getProfileBlogList } = require('../../controller/blog.profile')
+const { getSquareBlogList } = require('../../controller/blog.square')
+const { getFans } = require('../../controller/user.relation')
 const { isExist } = require('../../controller/user')
 
 router.get('/', loginRedirect, async (ctx, next) => {
-    await ctx.render('index', { blogData: '' })
+    const { userInfo } = ctx.session.userInfo
+    await ctx.render('index', {
+        userData: {
+            userInfo
+        },
+        blogData: ''
+    })
 })
 
 router.get('/profile', loginRedirect, async (ctx, next) => {
@@ -21,7 +28,7 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     // 已登录用户的信息
     const myUserInfo = ctx.session.userInfo
     const myUserName = myUserInfo.userName
-    
+
     let curUserInfo
     const { userName } = ctx.params
     const isMe = myUserName === userName
@@ -39,13 +46,29 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
         curUserInfo = existResult.data
     }
 
+    //获取第一页博客
     const result = await getProfileBlogList({ userName, pageIndex: 0 })
     const { isEmpty, count, blogList, pageIndex, pageSize } = result.data
+
+    //获取粉丝
+    const fansData = await getFans(curUserInfo.id)
+    const { count: fansCount, userList: fansList } = fansData.data
+
+    //是否关注当前用户
+    const amIFollowed = fansList.some(data => {
+        return data.userName == userName
+    })
+
     await ctx.render('profile',
         {
             userData: {
                 userInfo: curUserInfo,
-                isMe
+                isMe,
+                fansData: {
+                    count: fansCount,
+                    list: fansList
+                },
+                amIFollowed
             },
             blogData: {
                 isEmpty, count, blogList, pageIndex, pageSize
