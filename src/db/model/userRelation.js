@@ -1,7 +1,7 @@
 const Sequelize=require('sequelize')
 const seq=require('../seq')
 
-const userRelation=seq.define('userRelation',{
+const UserRelation=seq.define('userRelation',{
     userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -14,4 +14,4 @@ const userRelation=seq.define('userRelation',{
     }
 })
 
-module.exports=userRelation
+module.exports=UserRelation

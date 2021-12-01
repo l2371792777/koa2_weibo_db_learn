@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize')
 !(async function () {
     User.destroy({
         where: {
-            userName: { [Sequelize.Op.like]: '%u%' }
+            userName: { [Sequelize.Op.like]: '%ayaton%' }
         }
     })
 })()

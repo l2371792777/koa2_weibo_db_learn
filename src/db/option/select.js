@@ -1,15 +1,15 @@
 const { User, Blog, UserRelation } = require('../model/index')
 
 !(async function () {
-    // const ayanami = await User.findAll({
-    //     order: [
-    //         ['id', 'desc']
-    //     ]
-    // })
+//     const ayanami = await User.findAll({
+//         order: [
+//             ['id', 'desc']
+//         ]
+//     })
 
-    // const blogData = await Blog.findAll({
-
-    // })
+//    console.log(ayanami.map(data=>{
+//        return data
+//    }))
 
 
 
@@ -43,10 +43,20 @@ const { User, Blog, UserRelation } = require('../model/index')
     // })
     // console.log(JSON.stringify(result))
 
-    const result = await UserRelation.findAll({
+    const result = await UserRelation.findAndCountAll({
+        order: [
+            ['id', 'desc']
+        ],
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'userName', 'nickName', 'picture'],
+            }
+        ],
 
     })
-    result.map(res => {
+    result.rows.map(res => {
         console.log(JSON.stringify(res))
     })
+
 })()

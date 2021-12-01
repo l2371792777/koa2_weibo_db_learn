@@ -3,9 +3,10 @@
  * @author xxx
  */
 
-const { createBlog } = require('../servers/blog')
+const { createBlog,getBlogListByFollower } = require('../servers/blog')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const { createBlogFailInfo } = require('../model/ErrorInfo')
+const {PAGE_SIZE}=require('../conf/constants')
 const xss = require('xss')
 
 /**
@@ -29,6 +30,26 @@ async function create({ id, content, image }) {
     }
 }
 
+/**
+ * 获取首页微博列表
+ * @param {*} userName 
+ * @param {*} pageIndex 
+ */
+async function getHomeBlogList(userId,pageIndex=0)
+{
+    const result=await getBlogListByFollower({pageIndex,pageSize:PAGE_SIZE,userId})
+    const {count,blogList}=result
+
+    return new SuccessModel({
+        isEmpty:blogList.length==0,
+        count,
+        blogList,
+        pageIndex,
+        pageSize:PAGE_SIZE
+    })
+}
+
 module.exports = {
-    create
+    create,
+    getHomeBlogList
 }
