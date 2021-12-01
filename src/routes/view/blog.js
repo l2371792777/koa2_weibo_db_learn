@@ -6,7 +6,7 @@ const router = require('koa-router')()
 const { loginRedirect } = require('../../middlewares/loginCheck')
 const { getProfileBlogList } = require('../../controller/blog.profile')
 const { getSquareBlogList } = require('../../controller/blog.square')
-const { getFans } = require('../../controller/user.relation')
+const { getFans, getFollowers } = require('../../controller/user.relation')
 const { isExist } = require('../../controller/user')
 
 router.get('/', loginRedirect, async (ctx, next) => {
@@ -59,6 +59,10 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
         return data.userName == userName
     })
 
+    //获取关注人列表
+    const followersData = await getFollowers(curUserInfo.id)
+    const { count: followersCount, userList: followersList } = followersData.data
+
     await ctx.render('profile',
         {
             userData: {
@@ -68,8 +72,13 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
                     count: fansCount,
                     list: fansList
                 },
+                followersData: {
+                    count: followersCount,
+                    list: followersList
+                },
                 amIFollowed
             },
+
             blogData: {
                 isEmpty, count, blogList, pageIndex, pageSize
             }
