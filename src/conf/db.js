@@ -16,7 +16,7 @@ let MYSQL_CONF = {
     port: '3306',
     database: 'koa2_weibo_db'
 }
-
+console.log("isProd... " + isProd)
 if (isProd) {
     REDIS_CONF = {
         host: 'localhost',

@@ -209,3 +209,23 @@
 2021-12-02 18:11:55:   <-- GET /favicon.ico
 2021-12-02 18:11:55:   --> GET /favicon.ico 200 5ms 2.25kb
 2021-12-02 18:12:26: log
+2021-12-02 18:36:10: ENV... production
+2021-12-02 18:36:11: log
+2021-12-02 18:37:04: ENV... production
+2021-12-02 18:37:04: ENV... production
+2021-12-02 18:37:05: ENV... production
+2021-12-02 18:37:05: ENV... production
+2021-12-02 18:37:06: ENV... production
+2021-12-02 18:37:06: ENV... production
+2021-12-02 18:37:07: ENV... production
+2021-12-02 18:37:07: ENV... production
+2021-12-02 18:37:08: ENV... production
+2021-12-02 18:37:08: ENV... production
+2021-12-02 18:37:09: ENV... production
+2021-12-02 18:37:09: ENV... production
+2021-12-02 18:37:10: ENV... production
+2021-12-02 18:37:10: isProd... true
+2021-12-02 18:37:10: log
+2021-12-02 18:37:11: ENV... production
+2021-12-02 18:37:11: isProd... true
+2021-12-02 18:37:12: log
