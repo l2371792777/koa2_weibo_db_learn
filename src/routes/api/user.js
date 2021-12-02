@@ -7,6 +7,7 @@ const userValidator = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validator')
 const { isTest } = require('../../utils/env')
 const { loginCheck } = require('../../middlewares/loginCheck')
+const { getFollowers } = require('../../controller/user.relation')
 
 router.prefix('/api/user')
 
@@ -38,6 +39,18 @@ router.post('/delete', loginCheck, async (ctx, next) => {
         const { userName } = ctx.session.userInfo
         ctx.body = await deleteCurUser(userName)
     }
+})
+
+//获取关注人列表
+router.get('/getAtList', loginCheck, async (ctx, next) => {
+    const { id: userId } = ctx.session.userInfo
+    const result = await getFollowers(userId)
+    const { userList } = result.data
+    const list = userList.map(user => {
+        return `${user.nickName} - ${user.userName}`
+    })
+
+    ctx.body = list
 })
 
 //修改个人信息

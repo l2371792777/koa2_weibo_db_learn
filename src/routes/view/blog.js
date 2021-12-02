@@ -74,6 +74,7 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
         // 用户名存在
         curUserInfo = existResult.data
     }
+    canReply = true
 
     //获取第一页博客
     const result = await getProfileBlogList({ userName, pageIndex: 0 })
@@ -105,7 +106,8 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
                     count: followersCount,
                     list: followersList
                 },
-                amIFollowed
+                amIFollowed,
+                canReply
             },
 
             blogData: {
