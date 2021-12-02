@@ -1,0 +1,27 @@
+{
+    "apps": {
+        "name": "koa2-weibo",
+        "script": "bin/www",
+        "watch": true,
+        "ignore_watch": [
+            "node_modules",
+            "logs"
+        ],
+        "instances": 1,
+        "error_file": "logs/err.log",
+        "out_file": "logs/out.log",
+        "log_date_format": "YYYY-MM-DD HH:mm:ss",
+        "env": {
+            "NODE_ENV": "production", 
+            "REMOTE_ADDR": "" 
+        },
+        "env_dev": {
+            "NODE_ENV": "development", 
+            "REMOTE_ADDR": ""
+        },
+        "env_test": { 
+            "NODE_ENV": "test",
+            "REMOTE_ADDR": ""
+        }
+    }
+}

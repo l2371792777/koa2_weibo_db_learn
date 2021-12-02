@@ -27,7 +27,7 @@ const atMeApiRouter=require('./routes/api/blog.at')
 
 
 // error handler
-const onerrorConf = {}
+let onerrorConf = {}
 if (isProd) {
   onerrorConf = {
     redirect: '/error'
