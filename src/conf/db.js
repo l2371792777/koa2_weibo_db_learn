@@ -25,7 +25,7 @@ if (isProd) {
 
     MYSQL_CONF = {
         host: 'localhost',
-        user: 'root',
+        user: 'ayanami',
         password: 'ayanami',
         port: '3306',
         database: 'koa2_weibo_db'
