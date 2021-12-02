@@ -4,7 +4,6 @@
 
 const ENV = process.env.NODE_ENV
 
-console.log("ENV... " + ENV)
 module.exports = {
     isDev: ENV === 'dev',
     notDev: ENV !== 'dev',
