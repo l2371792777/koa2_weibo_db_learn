@@ -65,5 +65,9 @@ module.exports={
     deleteFollowerFailInfo:{
         errno:10015,
         message:'取消关注失败'
+    },
+    updateAtMeReadFailInfo:{
+        errno:10016,
+        message:'更新已读信息失败'
     }
 }

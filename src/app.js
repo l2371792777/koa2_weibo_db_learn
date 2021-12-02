@@ -23,6 +23,8 @@ const utilsApiRouter = require('./routes/api/utils')
 const blogHomeApiRouter = require('./routes/api/blog.home')
 const blogProfileApiRouter = require('./routes/api/blog.profile')
 const blogSquareApiRouter=require('./routes/api/blog.square')
+const atMeApiRouter=require('./routes/api/blog.at')
+
 
 // error handler
 const onerrorConf = {}
@@ -76,6 +78,7 @@ app.use(blogHomeApiRouter.routes(), blogHomeApiRouter.allowedMethods())
 app.use(blogProfileApiRouter.routes(), blogProfileApiRouter.allowedMethods())
 app.use(blogSquareApiRouter.routes(), blogSquareApiRouter.allowedMethods())
 app.use(utilsApiRouter.routes(), utilsApiRouter.allowedMethods())
+app.use(atMeApiRouter.routes(), atMeApiRouter.allowedMethods())
 //error最后注册
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
 

@@ -114,6 +114,12 @@
             var newPassword = $inputNewPassword.val()
             var newPasswordRepeat = $inputNewPasswordRepeat.val()
 
+            if(!curPassword||!newPassword||!newPasswordRepeat)
+            {
+                alert('密码不能为空')
+                return
+            }
+
             if (newPassword !== newPasswordRepeat) {
                 alert('两次新密码输入不一致')
                 return
