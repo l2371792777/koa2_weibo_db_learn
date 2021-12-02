@@ -13,7 +13,9 @@ const AtRelation=seq.define('atRelation',{
         comment:'博客id，外键'
     },
     isRead: {
-        type: Sequelize.TINYINT,
+        type: Sequelize.BOOLEAN,
+        allowNull:false,
+        defaultValue:false,
         comment:'已读',
     }
 })

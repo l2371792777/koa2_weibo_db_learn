@@ -1,4 +1,4 @@
-const { User, Blog, UserRelation } = require('../model/index')
+const { User, Blog, UserRelation ,AtRelation} = require('../model/index')
 
 !(async function () {
 //     const ayanami = await User.findAll({
@@ -43,16 +43,7 @@ const { User, Blog, UserRelation } = require('../model/index')
     // })
     // console.log(JSON.stringify(result))
 
-    const result = await UserRelation.findAndCountAll({
-        order: [
-            ['id', 'desc']
-        ],
-        include: [
-            {
-                model: User,
-                attributes: ['id', 'userName', 'nickName', 'picture'],
-            }
-        ],
+    const result = await AtRelation.findAndCountAll({
 
     })
     result.rows.map(res => {
